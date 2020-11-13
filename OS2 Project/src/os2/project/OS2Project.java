@@ -17,6 +17,7 @@ public class OS2Project {
     public static void main(String[] args) {
         // TODO code application logic here
         System.out.print("Reem");
+        System.out.print("hagar");
     }
     
 }
