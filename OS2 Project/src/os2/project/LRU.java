@@ -5,8 +5,10 @@
  */
 package os2.project;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
-
+import java.util.Queue;
 
 /**
  *
@@ -14,74 +16,55 @@ import java.util.LinkedList;
  */
 public class LRU {
 
-    int min(LinkedList<Integer> LRU){
-        int min_index = Integer.MAX_VALUE;
-        int index =0;
-        for(int num=0; num<LRU.size(); num++)
-      {
-          if(min_index > LRU.get(num))
-          {
-              min_index = LRU.get(num); 
-              index = num;
-          }
-      
-      }
-    return index;
-    }
-    
     void LRU(int no_frames, int arr_pages[]) {
         
         // To represent set of current pages.
-    LinkedList <Integer> Page_Table = new LinkedList<Integer>();
-    
+    HashSet<Integer> Page_Table = new HashSet<>(no_frames); 
     //Store LRU index
-    LinkedList <Integer> LRU_Index = new LinkedList<Integer>();
+    HashMap<Integer, Integer> indexes = new HashMap<>(); 
      
     int free_frames = no_frames;
     int no_of_hit=0;
     int no_of_miss=0;
+    int[] array_OutPut = new int[no_frames];
     
      System.out.print("Elements of Page table: ");
+          for (int element: array_OutPut) {
+            System.out.print(element+"\t");
+        }
+          System.out.println("");
           
-            System.out.println(Page_Table);
-        
-   
-    int LRU_count = 1;
+    int count=0;
     
-    for(int i=0;free_frames>0 && i<arr_pages.length;i++){
+    for(int i=0;free_frames>0;i++){
         
          
         boolean hit = Page_Table.contains(arr_pages[i]);
-        int index_of_page = Page_Table.indexOf(arr_pages[i]);
         
         if(hit == false){
            
     Page_Table.add(arr_pages[i]);
-    LRU_Index.add(LRU_count);
-    LRU_count++;
-   
+    array_OutPut[count]=arr_pages[i];
+    count++;
     
      System.out.print("Elements of Page table: ");
-          
-            System.out.print(Page_Table+"\t");
-        
-              System.out.println("Miss\n");
+          for (int element: array_OutPut) {
+            System.out.print(element+"\t");
+        }
+              System.out.print("Miss\n");
      
     no_of_miss++;
     free_frames--;
         }
     
     else {
-            LRU_Index.set(index_of_page,LRU_count);
-            LRU_count++;
             
             System.out.print("Elements of Page table: ");
-               
-            System.out.print(Page_Table+"\t");
-        
-              System.out.println("Hitt\n");
+               for (int element: array_OutPut) {
+            System.out.print(element+"\t");
+        }
+              System.out.print("Hitt\n");
             no_of_hit++;
-            
         }
     
     }
@@ -93,37 +76,10 @@ public class LRU {
         
          
          boolean hit = Page_Table.contains(arr_pages[j]);
-         int index_of_page = Page_Table.indexOf(arr_pages[j]);
-         
          if(hit == false){
-             
-             int page_to_remove = min(LRU_Index);
-             Page_Table.set(page_to_remove,arr_pages[j]);
-             LRU_Index.set(page_to_remove,LRU_count);
-             LRU_count++;
-             System.out.print("Elements of Page table: ");  
-             System.out.print(Page_Table+"\t");
-             System.out.println("Miss\n");
-             
-             no_of_miss++;
-         }
-         else {
-             
-             LRU_Index.set(index_of_page,LRU_count);
-             LRU_count++;
-
-             System.out.print("Elements of Page table: ");   
-             System.out.print(Page_Table+"\t");
-             System.out.println("Hitt\n");
-             no_of_hit++;
-             
          
          }
     }
-    
-     System.out.println("Total number of page faults:\t"+no_of_miss);
-     System.out.println("Total number of page faults:\t"+no_of_hit);
-     
     }
     
 }
