@@ -60,8 +60,7 @@ public class Optimal {
 
 
             boolean hit = Page_Table.contains(arr_pages[i]);
-            int index_of_page = Page_Table.indexOf(arr_pages[i]);
-
+            
             if(hit == false){
 
                 Page_Table.add(arr_pages[i]);
@@ -96,7 +95,7 @@ public class Optimal {
 
 
             boolean hit = Page_Table.contains(arr_pages[j]);
-            int index_of_page = Page_Table.indexOf(arr_pages[j]);
+           
 
             if(hit == false){
 
